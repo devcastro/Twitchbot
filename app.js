@@ -34,48 +34,48 @@ var blockedWords = ['ex gf']
 client.on('message',(channel, userstate, message, self)=>{
 
     if(self){return;}
-
-
-    if (message == "!emoteY") {
-        client.emoteonly("actioncastro");
+    
+    switch (message.toLowerCase()) {
+        case "!emotey":
+            client.emoteonly("actioncastro");
+            break;
+        case "!emoten":
+            client.emoteonlyoff("actioncastro");
+            break;
+        case "!followery":
+            client.followersonly("actioncastro");
+            break;
+        case "!followern":
+            client.followersonlyoff("actioncastro");
+            break;
+        case "!clear":
+            client.clear("actioncastro")
+            break;
+        case "frank ocean":
+            client.say(channel, "I THOUGHT THAT I WAS DREAMING... WHEN YOU SAID YOU LOVED ME");
+            break;
+        case "hi":
+            client.say(channel, "What up, lollypop")
+            break;
+        case "hello":
+            client.say(channel, "...is it me you're looking for?")
+            break;
+        case "yo": case "yo!": case "yo!!":
+            client.say(channel, "What's good ma'dude")
+            break;
+        case "castro":
+            client.say(channel, "ACTION")
+            break;
+        case "brb":
+            client.say(channel, "Catch you later, alligator!")
+            break;
+        case "!discord":
+            client.say(channel, "hi! you can join our discord here: https://discord.gg/bUaJb7Cu2G ! much love ! " )
+            break;
+        case "!link":
+            client.say(channel, "make sure to follow me! Streaming in the Discord!")
+            break;
     }
-    if (message == "!emoteN") {
-        client.emoteonlyoff("actioncastro");
-    }
-    if (message==="!followerY") {
-        client.followersonly("actioncastro");
-    }
-    if (message=="!followerN") {
-        client.followersonlyoff("actioncastro");
-    }
-    if(message=="!clear") {
-        client.clear("actioncastro")
-    }
-    if (message=="Frank Ocean" || message=="frank Ocean" || message=="frank ocean" || message=="Frank ocean" || message=="FRANK OCEAN"){
-        client.say(channel, "I THOUGHT THAT I WAS DREAMING... WHEN YOU SAID YOU LOVED ME");
-    }
-    if (message==="hi"|| message==="HI" || message==="Hi"){
-        client.say(channel, "What up, lollypop")
-    }
-    if (message==="castro"|| message==="Castro" || message==="CASTRO"){
-        client.say(channel, "ACTION")
-    }
-    if (message==="hello"|| message==="HELLO" || message==="Hello"){
-        client.say(channel, "...is it me you're looking for?")
-    }
-    if (message==="brb"|| message==="BRB" || message==="be right back"){
-        client.say(channel, "Catch you later, alligator!")
-    }
-    if (message==="yo"|| message==="Yo!" || message==="yo!!" || message==="YO"){
-        client.say(channel, "What's good ma'dude")
-    }
-    if(message=="!discord" || message=="!Discord") {
-        client.say(channel, "hi! you can join our discord here: https://discord.gg/bUaJb7Cu2G ! much love ! " )
-    }
-    if(message=="!link" || message=="!Link") {
-        client.say(channel, "make sure to follow me! Streaming in the Discord!")
-    }
-
 
     let shouldSendMessage=false;
     shouldSendMessage = blockedWords.some(blockedWords=>{message.includes(blockedWords.toLowerCase())});

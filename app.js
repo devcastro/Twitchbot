@@ -77,10 +77,10 @@ client.on('message',(channel, userstate, message, self)=>{
             break;
     }
 
-    let shouldSendMessage=false;
-    shouldSendMessage = blockedWords.some(blockedWords=>{message.includes(blockedWords.toLowerCase())});
-    
-    if (shouldSendMessage){
+    let blockedWords = ['ex', 'gf']
+    let whitelistedUsers = ['actioncastro']
+
+    if (message.toLowerCase().indexOf(blockedWords) === -1 && !userstate.username.toLowerCase().indexOf(whitelistedUsers) === -1) {
         client.deletemessage(channel, userstate.id);
         client.say(channel, `@${userstate.username} oopsie you naughty!`)
     }

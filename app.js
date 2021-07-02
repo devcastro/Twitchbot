@@ -35,21 +35,44 @@ client.on('message',(channel, userstate, message, self)=>{
 
     if(self){return;}
     
+    let channelMods = ['actioncastro', 'thebethttv']
+    
     switch (message.toLowerCase()) {
         case "!emotey":
-            client.emoteonly("actioncastro");
+            if(userstate.username.toLowerCase().indexOf(channelMods) === -1) {
+                client.emoteonly("actioncastro");
+            } else {
+                client.say(channel, "HEY! You can't do that...")
+            }
             break;
         case "!emoten":
-            client.emoteonlyoff("actioncastro");
+            if(userstate.username.toLowerCase().indexOf(channelMods) === -1) {
+                client.emoteonlyoff("actioncastro");
+            } else {
+                client.say(channel, "HEY! You can't do that...")
+            }
             break;
         case "!followery":
-            client.followersonly("actioncastro");
+            if(userstate.username.toLowerCase().indexOf(channelMods) === -1) {
+                client.followersonly("actioncastro");
+            } else {
+                client.say(channel, "HEY! You can't do that...")
+            }
             break;
         case "!followern":
-            client.followersonlyoff("actioncastro");
+            if(userstate.username.toLowerCase().indexOf(channelMods) === -1) {
+                client.followersonlyoff("actioncastro");
+            } else {
+                client.say(channel, "HEY! You can't do that...")
+            }
             break;
         case "!clear":
-            client.clear("actioncastro")
+            if(userstate.username.toLowerCase().indexOf(channelMods) === -1) {
+                client.clear("actioncastro")
+                client.say(channel, `Chat was cleared by ${userstate.username}`)
+            } else {
+                client.say(channel, "HEY! You can't do that...")
+            }
             break;
         case "frank ocean":
             client.say(channel, "I THOUGHT THAT I WAS DREAMING... WHEN YOU SAID YOU LOVED ME");

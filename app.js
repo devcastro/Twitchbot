@@ -9,7 +9,7 @@ const opts = {
   },
   identity: {
     username: "acastrobot",
-    password: "oauth:8netmcwxgk1a798q7alt9oo4by2ohk",
+    password: "",
   },
   channels: ["actioncastro"],
 };

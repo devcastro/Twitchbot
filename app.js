@@ -1,4 +1,5 @@
 const tmi = require("tmi.js");
+const spotify = require('https://pizzabot.t1nc4n.tech/sptf-cur-track?code=AQAAUkG-GkEJmilvc63QdAuPcg1rE1B6ZSNrdOMqD_BY0DA8DguyqjMsqCy85tLCFJRNzJ3guJmH3aIzS-vrk0W_mZRB291VeCWm2cBsxYhxCA-TthNKAriOQO6UxqPgxRYnZa7-cbzezdRDVnz05LMyifqbIOVrT_Y_X4XYRUMZDZ3c_FwYe1H2DsGuywaEOPrn09syY5faSR-OZhd4c8ux_SIHrQ')
 
 //const regexpCommand = new RegExp(/^!( [a-zA-Z0-9]+)(?:\W+)?(.*)?/);
 
@@ -8,7 +9,7 @@ const opts = {
   },
   identity: {
     username: "acastrobot",
-    password: "HIDDEN",
+    password: "oauth:8netmcwxgk1a798q7alt9oo4by2ohk",
   },
   channels: ["actioncastro"],
 };
@@ -23,51 +24,29 @@ const client = new tmi.client(opts);
 //}
 
 //});
-var blockedWords = ["ex gf"];
+
+client.on('connected', onConnectedHandler);
 
 client.on("message", (channel, userstate, message, self) => {
   if (self) {
     return;
   }
 
-  let channelMods = ["actioncastro"];
-
   switch (message.toLowerCase()) {
     case "!emotey":
-      if (userstate.username.toLowerCase().indexOf(channelMods) === -1) {
-        client.emoteonly("actioncastro");
-      } else {
-        client.say(channel, "HEY! You can't do that...");
-      }
+      client.emoteonly("actioncastro");
       break;
     case "!emoten":
-      if (userstate.username.toLowerCase().indexOf(channelMods) === -1) {
-        client.emoteonlyoff("actioncastro");
-      } else {
-        client.say(channel, "HEY! You can't do that...");
-      }
+      client.emoteonlyoff("actioncastro");
       break;
     case "!followery":
-      if (userstate.username.toLowerCase().indexOf(channelMods) === -1) {
-        client.followersonly("actioncastro");
-      } else {
-        client.say(channel, "HEY! You can't do that...");
-      }
+      client.followersonly("actioncastro");
       break;
     case "!followern":
-      if (userstate.username.toLowerCase().indexOf(channelMods) === -1) {
-        client.followersonlyoff("actioncastro");
-      } else {
-        client.say(channel, "HEY! You can't do that...");
-      }
+      client.followersonlyoff("actioncastro");
       break;
     case "!clear":
-      if (userstate.username.toLowerCase().indexOf(channelMods) === -1) {
-        client.clear("actioncastro");
-        client.say(channel, `Chat was cleared by ${userstate.username}`);
-      } else {
-        client.say(channel, "HEY! You can't do that...");
-      }
+      client.clear("actioncastro");
       break;
     case "frank ocean":
       client.say(
@@ -95,7 +74,7 @@ client.on("message", (channel, userstate, message, self) => {
     case "!discord":
       client.say(
         channel,
-        "hi! you can join our discord here: https://discord.gg/bUaJb7Cu2G ! much love ! "
+        "hi! you can join our discord here: hhttps://discord.gg/3QeswtdnDR ! much love ! "
       );
       break;
     case "!link":
@@ -103,16 +82,35 @@ client.on("message", (channel, userstate, message, self) => {
       break;
   }
 
-  let blockedWords = ["ex", "gf"];
-  let whitelistedUsers = ["actioncastro"];
+  let shouldSendMessage = false;
+  shouldSendMessage = blockedWords.some((blockedWords) => {
+    message.includes(blockedWords.toLowerCase());
+  });
 
-  if (
-    message.toLowerCase().indexOf(blockedWords) === -1 &&
-    !userstate.username.toLowerCase().indexOf(whitelistedUsers) === -1
-  ) {
-    client.deletemessage(channel, userstate.id);
+  if (shouldSendMessage) {
+    client.clear(channel, userstate.id);
     client.say(channel, `@${userstate.username} oopsie you naughty!`);
   }
 });
 
+
 client.connect();
+
+  const commandName = msg.trim();
+
+  if (commandName === '!dice') {
+    const num = rollDice();
+    client.say(target, `You rolled a ${num}`);
+    console.log(`* Executed ${commandName} command`);
+  } else {
+    console.log(`* Unknown command ${commandName}`);
+  }
+
+function rollDice () {
+  const sides = 6;
+  return Math.floor(Math.random() * sides) + 1;
+}
+
+function onConnectedHandler (addr, port) {
+  console.log(`* Connected to ${addr}:${port}`);
+}

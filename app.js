@@ -1,5 +1,4 @@
 const tmi = require("tmi.js");
-const spotify = require('https://pizzabot.t1nc4n.tech/sptf-cur-track?code=AQAAUkG-GkEJmilvc63QdAuPcg1rE1B6ZSNrdOMqD_BY0DA8DguyqjMsqCy85tLCFJRNzJ3guJmH3aIzS-vrk0W_mZRB291VeCWm2cBsxYhxCA-TthNKAriOQO6UxqPgxRYnZa7-cbzezdRDVnz05LMyifqbIOVrT_Y_X4XYRUMZDZ3c_FwYe1H2DsGuywaEOPrn09syY5faSR-OZhd4c8ux_SIHrQ')
 
 //const regexpCommand = new RegExp(/^!( [a-zA-Z0-9]+)(?:\W+)?(.*)?/);
 
@@ -9,21 +8,13 @@ const opts = {
   },
   identity: {
     username: "acastrobot",
-    password: "",
+    password: "oauth:8netmcwxgk1a798q7alt9oo4by2ohk",
   },
   channels: ["actioncastro"],
 };
 
 const client = new tmi.client(opts);
 
-//client.connect();
-
-//client.on('chat',(channel, userstate, message, self)=>{
-///if (message === "hello") {
-//    client.say(channel,"hello");
-//}
-
-//});
 
 client.on('connected', onConnectedHandler);
 
